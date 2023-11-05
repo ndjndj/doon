@@ -57,6 +57,9 @@ class _State extends State<_Main> {
           decoration: Config.background,
           child: Scaffold(
             backgroundColor: const Color(0xFFFFFFFF).withOpacity(0.4),
+            body: Center(
+              child: Text("text"),
+            )
           )
         )
       ),
