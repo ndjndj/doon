@@ -27,8 +27,14 @@ class Main extends StatelessWidget {
   }
 }
 
-class _Main extends StatelessWidget {
+class _Main extends StatefulWidget {
   const _Main();
+
+  @override 
+  State<_Main> createState() => _State();
+}
+
+class _State extends State<_Main> {
 
   @override Widget build(BuildContext context) {
     return MaterialApp(
