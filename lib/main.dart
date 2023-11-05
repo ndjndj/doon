@@ -2,6 +2,7 @@
 import 'package:doon/internal/config/config.dart';
 import 'package:doon/internal/widget/restart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -39,6 +40,20 @@ class _Main extends StatelessWidget {
           Theme.of(context).textTheme
         ),
         primarySwatch: Colors.indigo
+      ),
+      home: KeyboardDismissOnTap(
+        child: const DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFFEF32D9),
+                Color(0xFF89FFFD),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight
+            )
+          ),
+        )
       ),
     );
   }
