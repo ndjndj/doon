@@ -3,6 +3,7 @@ import 'package:doon/internal/config/config.dart';
 import 'package:doon/internal/widget/restart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +33,13 @@ class _Main extends StatelessWidget {
     return MaterialApp(
       title: Config.title,
       themeMode: ThemeMode.system,
+      theme: ThemeData(
+        useMaterial3: false,
+        textTheme: GoogleFonts.kiwiMaruTextTheme(
+          Theme.of(context).textTheme
+        ),
+        primarySwatch: Colors.indigo
+      ),
     );
   }
 }

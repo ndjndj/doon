@@ -1,5 +1,6 @@
+
 class Config {
   Config._();
 
-  static const title = "doon";
+  static const String title = "doon";
 }
