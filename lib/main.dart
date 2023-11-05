@@ -36,6 +36,11 @@ class _Main extends StatefulWidget {
 
 class _State extends State<_Main> {
 
+  @override 
+  void initState() {
+    super.initState();
+  }
+
   @override Widget build(BuildContext context) {
     return MaterialApp(
       title: Config.title,
