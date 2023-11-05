@@ -1,5 +1,5 @@
 
-import 'package:doon/config/config.dart';
+import 'package:doon/internal/config/config.dart';
 import 'package:flutter/material.dart';
 
 class Main extends StatelessWidget {
