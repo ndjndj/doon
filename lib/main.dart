@@ -8,11 +8,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(
-    const Restart(
-      child: ProviderScope(
-        child: Main()
-      ),
-    )
+    const Main()
   );
 }
 
