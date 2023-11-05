@@ -42,8 +42,8 @@ class _Main extends StatelessWidget {
         primarySwatch: Colors.indigo
       ),
       home: KeyboardDismissOnTap(
-        child: const DecoratedBox(
-          decoration: BoxDecoration(
+        child: DecoratedBox(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 Color(0xFFEF32D9),
@@ -51,8 +51,11 @@ class _Main extends StatelessWidget {
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight
-            )
+            ),
           ),
+          child: Scaffold(
+            backgroundColor: const Color(0xFFFFFFFF).withOpacity(0.4),
+          )
         )
       ),
     );
