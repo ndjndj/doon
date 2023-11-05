@@ -43,16 +43,7 @@ class _Main extends StatelessWidget {
       ),
       home: KeyboardDismissOnTap(
         child: DecoratedBox(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xFFEF32D9),
-                Color(0xFF89FFFD),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight
-            ),
-          ),
+          decoration: Config.background,
           child: Scaffold(
             backgroundColor: const Color(0xFFFFFFFF).withOpacity(0.4),
           )
