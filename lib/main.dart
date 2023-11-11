@@ -1,6 +1,6 @@
 
 import 'package:doon/internal/config/config.dart';
-import 'package:doon/internal/widget/restart.dart';
+import 'package:doon/internal/widget/restart/restart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
