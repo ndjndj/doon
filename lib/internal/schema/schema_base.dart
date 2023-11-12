@@ -2,7 +2,7 @@
 import 'package:isar/isar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart' show getApplicationSupportDirectory;
-import 'package:doon/view/util/schema/exports_schema.dart';
+import 'package:doon/internal/schema/exports_schema.dart';
 
 final isarProvider = FutureProvider(
   (ref) async {
