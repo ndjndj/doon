@@ -17,6 +17,9 @@ class SquareButton extends StatelessWidget {
           border: Border.all(),
           borderRadius: BorderRadius.circular(4)
         ),
+        child: Center(
+          child: Text("${quiz.details.length}問"),
+        ),
       ),
     );
   }
