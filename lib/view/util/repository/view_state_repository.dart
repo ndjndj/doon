@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 enum ViewState {
   top(
@@ -25,4 +26,20 @@ enum ViewState {
     required this.text,
     required this.widget
   });
+}
+
+final viewStateProvider = NotifierProvider<
+  ViewStateNotifier, ViewState
+>(
+  ViewStateNotifier.new
+);
+
+class ViewStateNotifier extends Notifier<ViewState> {
+  @override 
+  ViewState build() => ViewState.top;
+
+  void toTop() => state = ViewState.top;
+  void toQuiz() => state = ViewState.quiz;
+  void toResult() => state = ViewState.result;
+  void toSetting() => state = ViewState.setting;
 }
