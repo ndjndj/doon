@@ -1,6 +1,7 @@
 
 import 'package:doon/internal/config/config.dart';
 import 'package:doon/internal/widget/restart/restart.dart';
+import 'package:doon/view/util/widget/scaffold_frame/scaffold_frame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,17 +53,7 @@ class _State extends State<_Main> {
         ),
         primarySwatch: Colors.indigo
       ),
-      home: KeyboardDismissOnTap(
-        child: DecoratedBox(
-          decoration: Config.background,
-          child: Scaffold(
-            backgroundColor: const Color(0xFFFFFFFF).withOpacity(0.4),
-            body: Center(
-              child: Text("text"),
-            )
-          )
-        )
-      ),
+      home: const ScaffoldFrame()
     );
   }
 }
