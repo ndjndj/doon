@@ -7,7 +7,15 @@ part "quiz_schema.g.dart";
 class QuizSchema {
   Id? id = Isar.autoIncrement;
 
-  late String rank;
+  late String rankId;
+
+  late String rankName;
+
+  late String stageId;
+
+  late String stageName;
+
+  late DateTime createdAt;
 
   final details = IsarLinks<QuizDetailSchema>();
 }
