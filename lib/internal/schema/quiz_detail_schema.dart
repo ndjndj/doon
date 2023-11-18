@@ -5,9 +5,11 @@ part "quiz_detail_schema.g.dart";
 
 @Collection()
 class QuizDetailSchema {
-  Id? id = Isar.autoIncrement;
-
+  Id? get hashRankId => SchemaBase.fastHash(stageId);
+  
   late String stageId;
 
   late String quizId;
+
+  int get hashQuizId => SchemaBase.fastHash(quizId);
 }

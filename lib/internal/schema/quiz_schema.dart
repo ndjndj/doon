@@ -34,5 +34,11 @@ class QuizSchema {
 
   late DateTime createdAt;
 
+  int get hashRankName => SchemaBase.fastHash(rankName);
+
+  int get hashStageId => SchemaBase.fastHash(stageId);
+
+  int get hashStageName => SchemaBase.fastHash(stageName);
+
   final details = IsarLinks<QuizDetailSchema>();
 }
