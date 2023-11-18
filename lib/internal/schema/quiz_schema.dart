@@ -22,7 +22,7 @@ part "quiz_schema.g.dart";
 /// ex.) 1-1
 @Collection()
 class QuizSchema {
-  Id? id = Isar.autoIncrement;
+  Id? get hashRankId => SchemaBase.fastHash(rankId);
 
   late String rankId;
 

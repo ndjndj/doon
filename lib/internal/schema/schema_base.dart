@@ -8,12 +8,12 @@ final isarProvider = FutureProvider(
   (ref) async {
     print("ISAR PROVIDER.....");
     
-    return LocalIsar.openIsar();
+    return SchemaBase.openIsar();
   }
 );
 
-class LocalIsar {
-  const LocalIsar._();
+class SchemaBase {
+  const SchemaBase._();
   static final List<CollectionSchema<dynamic>> schemas = [
     
   ];
@@ -31,9 +31,9 @@ class LocalIsar {
 
     final dir = await getApplicationSupportDirectory();
     Isar isar = await Isar.open(
-      LocalIsar.schemas,
+      SchemaBase.schemas,
       directory: dir.path,
-      inspector: LocalIsar.useInspector
+      inspector: SchemaBase.useInspector
     );
 
     print('SUCCESS: local_isar.dart');
