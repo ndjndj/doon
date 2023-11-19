@@ -15,7 +15,8 @@ final isarProvider = FutureProvider(
 class SchemaBase {
   const SchemaBase._();
   static final List<CollectionSchema<dynamic>> schemas = [
-    
+    QuizSchemaSchema,
+    QuizDetailSchemaSchema
   ];
   static const bool useInspector = true;
 
