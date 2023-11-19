@@ -1,4 +1,4 @@
-import 'package:doon/internal/schema/exports_schema.dart';
+import 'package:doon/internal/schema/model/exports_schema.dart';
 import 'package:flutter/material.dart';
 
 class SquareButton extends StatelessWidget { 
