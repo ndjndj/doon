@@ -22,23 +22,38 @@ const QuizSchemaSchema = CollectionSchema(
       name: r'createdAt',
       type: IsarType.dateTime,
     ),
-    r'rankId': PropertySchema(
+    r'hashRankName': PropertySchema(
       id: 1,
+      name: r'hashRankName',
+      type: IsarType.long,
+    ),
+    r'hashStageId': PropertySchema(
+      id: 2,
+      name: r'hashStageId',
+      type: IsarType.long,
+    ),
+    r'hashStageName': PropertySchema(
+      id: 3,
+      name: r'hashStageName',
+      type: IsarType.long,
+    ),
+    r'rankId': PropertySchema(
+      id: 4,
       name: r'rankId',
       type: IsarType.string,
     ),
     r'rankName': PropertySchema(
-      id: 2,
+      id: 5,
       name: r'rankName',
       type: IsarType.string,
     ),
     r'stageId': PropertySchema(
-      id: 3,
+      id: 6,
       name: r'stageId',
       type: IsarType.string,
     ),
     r'stageName': PropertySchema(
-      id: 4,
+      id: 7,
       name: r'stageName',
       type: IsarType.string,
     )
@@ -84,10 +99,13 @@ void _quizSchemaSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeDateTime(offsets[0], object.createdAt);
-  writer.writeString(offsets[1], object.rankId);
-  writer.writeString(offsets[2], object.rankName);
-  writer.writeString(offsets[3], object.stageId);
-  writer.writeString(offsets[4], object.stageName);
+  writer.writeLong(offsets[1], object.hashRankName);
+  writer.writeLong(offsets[2], object.hashStageId);
+  writer.writeLong(offsets[3], object.hashStageName);
+  writer.writeString(offsets[4], object.rankId);
+  writer.writeString(offsets[5], object.rankName);
+  writer.writeString(offsets[6], object.stageId);
+  writer.writeString(offsets[7], object.stageName);
 }
 
 QuizSchema _quizSchemaDeserialize(
@@ -98,10 +116,10 @@ QuizSchema _quizSchemaDeserialize(
 ) {
   final object = QuizSchema();
   object.createdAt = reader.readDateTime(offsets[0]);
-  object.rankId = reader.readString(offsets[1]);
-  object.rankName = reader.readString(offsets[2]);
-  object.stageId = reader.readString(offsets[3]);
-  object.stageName = reader.readString(offsets[4]);
+  object.rankId = reader.readString(offsets[4]);
+  object.rankName = reader.readString(offsets[5]);
+  object.stageId = reader.readString(offsets[6]);
+  object.stageName = reader.readString(offsets[7]);
   return object;
 }
 
@@ -115,12 +133,18 @@ P _quizSchemaDeserializeProp<P>(
     case 0:
       return (reader.readDateTime(offset)) as P;
     case 1:
-      return (reader.readString(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 2:
-      return (reader.readString(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 3:
-      return (reader.readString(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 4:
+      return (reader.readString(offset)) as P;
+    case 5:
+      return (reader.readString(offset)) as P;
+    case 6:
+      return (reader.readString(offset)) as P;
+    case 7:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -342,6 +366,174 @@ extension QuizSchemaQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
         property: r'hashRankId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterFilterCondition>
+      hashRankNameEqualTo(int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'hashRankName',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterFilterCondition>
+      hashRankNameGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'hashRankName',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterFilterCondition>
+      hashRankNameLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'hashRankName',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterFilterCondition>
+      hashRankNameBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'hashRankName',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterFilterCondition>
+      hashStageIdEqualTo(int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'hashStageId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterFilterCondition>
+      hashStageIdGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'hashStageId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterFilterCondition>
+      hashStageIdLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'hashStageId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterFilterCondition>
+      hashStageIdBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'hashStageId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterFilterCondition>
+      hashStageNameEqualTo(int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'hashStageName',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterFilterCondition>
+      hashStageNameGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'hashStageName',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterFilterCondition>
+      hashStageNameLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'hashStageName',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterFilterCondition>
+      hashStageNameBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'hashStageName',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -962,6 +1154,42 @@ extension QuizSchemaQuerySortBy
     });
   }
 
+  QueryBuilder<QuizSchema, QuizSchema, QAfterSortBy> sortByHashRankName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashRankName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterSortBy> sortByHashRankNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashRankName', Sort.desc);
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterSortBy> sortByHashStageId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashStageId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterSortBy> sortByHashStageIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashStageId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterSortBy> sortByHashStageName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashStageName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterSortBy> sortByHashStageNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashStageName', Sort.desc);
+    });
+  }
+
   QueryBuilder<QuizSchema, QuizSchema, QAfterSortBy> sortByRankId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'rankId', Sort.asc);
@@ -1037,6 +1265,42 @@ extension QuizSchemaQuerySortThenBy
     });
   }
 
+  QueryBuilder<QuizSchema, QuizSchema, QAfterSortBy> thenByHashRankName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashRankName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterSortBy> thenByHashRankNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashRankName', Sort.desc);
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterSortBy> thenByHashStageId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashStageId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterSortBy> thenByHashStageIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashStageId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterSortBy> thenByHashStageName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashStageName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QAfterSortBy> thenByHashStageNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashStageName', Sort.desc);
+    });
+  }
+
   QueryBuilder<QuizSchema, QuizSchema, QAfterSortBy> thenByRankId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'rankId', Sort.asc);
@@ -1094,6 +1358,24 @@ extension QuizSchemaQueryWhereDistinct
     });
   }
 
+  QueryBuilder<QuizSchema, QuizSchema, QDistinct> distinctByHashRankName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'hashRankName');
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QDistinct> distinctByHashStageId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'hashStageId');
+    });
+  }
+
+  QueryBuilder<QuizSchema, QuizSchema, QDistinct> distinctByHashStageName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'hashStageName');
+    });
+  }
+
   QueryBuilder<QuizSchema, QuizSchema, QDistinct> distinctByRankId(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1134,6 +1416,24 @@ extension QuizSchemaQueryProperty
   QueryBuilder<QuizSchema, DateTime, QQueryOperations> createdAtProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'createdAt');
+    });
+  }
+
+  QueryBuilder<QuizSchema, int, QQueryOperations> hashRankNameProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'hashRankName');
+    });
+  }
+
+  QueryBuilder<QuizSchema, int, QQueryOperations> hashStageIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'hashStageId');
+    });
+  }
+
+  QueryBuilder<QuizSchema, int, QQueryOperations> hashStageNameProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'hashStageName');
     });
   }
 

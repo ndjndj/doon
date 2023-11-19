@@ -17,13 +17,18 @@ const QuizDetailSchemaSchema = CollectionSchema(
   name: r'QuizDetailSchema',
   id: -180105670684922644,
   properties: {
-    r'quizId': PropertySchema(
+    r'hashQuizId': PropertySchema(
       id: 0,
+      name: r'hashQuizId',
+      type: IsarType.long,
+    ),
+    r'quizId': PropertySchema(
+      id: 1,
       name: r'quizId',
       type: IsarType.string,
     ),
     r'stageId': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'stageId',
       type: IsarType.string,
     )
@@ -32,7 +37,7 @@ const QuizDetailSchemaSchema = CollectionSchema(
   serialize: _quizDetailSchemaSerialize,
   deserialize: _quizDetailSchemaDeserialize,
   deserializeProp: _quizDetailSchemaDeserializeProp,
-  idName: r'id',
+  idName: r'hashRankId',
   indexes: {},
   links: {},
   embeddedSchemas: {},
@@ -59,8 +64,9 @@ void _quizDetailSchemaSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.quizId);
-  writer.writeString(offsets[1], object.stageId);
+  writer.writeLong(offsets[0], object.hashQuizId);
+  writer.writeString(offsets[1], object.quizId);
+  writer.writeString(offsets[2], object.stageId);
 }
 
 QuizDetailSchema _quizDetailSchemaDeserialize(
@@ -70,9 +76,8 @@ QuizDetailSchema _quizDetailSchemaDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = QuizDetailSchema();
-  object.id = id;
-  object.quizId = reader.readString(offsets[0]);
-  object.stageId = reader.readString(offsets[1]);
+  object.quizId = reader.readString(offsets[1]);
+  object.stageId = reader.readString(offsets[2]);
   return object;
 }
 
@@ -84,8 +89,10 @@ P _quizDetailSchemaDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readString(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 1:
+      return (reader.readString(offset)) as P;
+    case 2:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -93,7 +100,7 @@ P _quizDetailSchemaDeserializeProp<P>(
 }
 
 Id _quizDetailSchemaGetId(QuizDetailSchema object) {
-  return object.id ?? Isar.autoIncrement;
+  return object.hashRankId ?? Isar.autoIncrement;
 }
 
 List<IsarLinkBase<dynamic>> _quizDetailSchemaGetLinks(QuizDetailSchema object) {
@@ -101,13 +108,12 @@ List<IsarLinkBase<dynamic>> _quizDetailSchemaGetLinks(QuizDetailSchema object) {
 }
 
 void _quizDetailSchemaAttach(
-    IsarCollection<dynamic> col, Id id, QuizDetailSchema object) {
-  object.id = id;
-}
+    IsarCollection<dynamic> col, Id id, QuizDetailSchema object) {}
 
 extension QuizDetailSchemaQueryWhereSort
     on QueryBuilder<QuizDetailSchema, QuizDetailSchema, QWhere> {
-  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterWhere> anyId() {
+  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterWhere>
+      anyHashRankId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
@@ -116,68 +122,69 @@ extension QuizDetailSchemaQueryWhereSort
 
 extension QuizDetailSchemaQueryWhere
     on QueryBuilder<QuizDetailSchema, QuizDetailSchema, QWhereClause> {
-  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterWhereClause> idEqualTo(
-      Id id) {
+  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterWhereClause>
+      hashRankIdEqualTo(Id hashRankId) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
-        lower: id,
-        upper: id,
+        lower: hashRankId,
+        upper: hashRankId,
       ));
     });
   }
 
   QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterWhereClause>
-      idNotEqualTo(Id id) {
+      hashRankIdNotEqualTo(Id hashRankId) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
             .addWhereClause(
-              IdWhereClause.lessThan(upper: id, includeUpper: false),
+              IdWhereClause.lessThan(upper: hashRankId, includeUpper: false),
             )
             .addWhereClause(
-              IdWhereClause.greaterThan(lower: id, includeLower: false),
+              IdWhereClause.greaterThan(lower: hashRankId, includeLower: false),
             );
       } else {
         return query
             .addWhereClause(
-              IdWhereClause.greaterThan(lower: id, includeLower: false),
+              IdWhereClause.greaterThan(lower: hashRankId, includeLower: false),
             )
             .addWhereClause(
-              IdWhereClause.lessThan(upper: id, includeUpper: false),
+              IdWhereClause.lessThan(upper: hashRankId, includeUpper: false),
             );
       }
     });
   }
 
   QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterWhereClause>
-      idGreaterThan(Id id, {bool include = false}) {
+      hashRankIdGreaterThan(Id hashRankId, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
-        IdWhereClause.greaterThan(lower: id, includeLower: include),
+        IdWhereClause.greaterThan(lower: hashRankId, includeLower: include),
       );
     });
   }
 
   QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterWhereClause>
-      idLessThan(Id id, {bool include = false}) {
+      hashRankIdLessThan(Id hashRankId, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
-        IdWhereClause.lessThan(upper: id, includeUpper: include),
+        IdWhereClause.lessThan(upper: hashRankId, includeUpper: include),
       );
     });
   }
 
-  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterWhereClause> idBetween(
-    Id lowerId,
-    Id upperId, {
+  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterWhereClause>
+      hashRankIdBetween(
+    Id lowerHashRankId,
+    Id upperHashRankId, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
-        lower: lowerId,
+        lower: lowerHashRankId,
         includeLower: includeLower,
-        upper: upperId,
+        upper: upperHashRankId,
         includeUpper: includeUpper,
       ));
     });
@@ -187,63 +194,119 @@ extension QuizDetailSchemaQueryWhere
 extension QuizDetailSchemaQueryFilter
     on QueryBuilder<QuizDetailSchema, QuizDetailSchema, QFilterCondition> {
   QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterFilterCondition>
-      idIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'id',
-      ));
-    });
-  }
-
-  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterFilterCondition>
-      idIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'id',
-      ));
-    });
-  }
-
-  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterFilterCondition>
-      idEqualTo(Id? value) {
+      hashQuizIdEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'id',
+        property: r'hashQuizId',
         value: value,
       ));
     });
   }
 
   QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterFilterCondition>
-      idGreaterThan(
+      hashQuizIdGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'hashQuizId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterFilterCondition>
+      hashQuizIdLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'hashQuizId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterFilterCondition>
+      hashQuizIdBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'hashQuizId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterFilterCondition>
+      hashRankIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'hashRankId',
+      ));
+    });
+  }
+
+  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterFilterCondition>
+      hashRankIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'hashRankId',
+      ));
+    });
+  }
+
+  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterFilterCondition>
+      hashRankIdEqualTo(Id? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'hashRankId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterFilterCondition>
+      hashRankIdGreaterThan(
     Id? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'id',
+        property: r'hashRankId',
         value: value,
       ));
     });
   }
 
   QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterFilterCondition>
-      idLessThan(
+      hashRankIdLessThan(
     Id? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'id',
+        property: r'hashRankId',
         value: value,
       ));
     });
   }
 
   QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterFilterCondition>
-      idBetween(
+      hashRankIdBetween(
     Id? lower,
     Id? upper, {
     bool includeLower = true,
@@ -251,7 +314,7 @@ extension QuizDetailSchemaQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'id',
+        property: r'hashRankId',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -542,6 +605,20 @@ extension QuizDetailSchemaQueryLinks
 extension QuizDetailSchemaQuerySortBy
     on QueryBuilder<QuizDetailSchema, QuizDetailSchema, QSortBy> {
   QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterSortBy>
+      sortByHashQuizId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashQuizId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterSortBy>
+      sortByHashQuizIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashQuizId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterSortBy>
       sortByQuizId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'quizId', Sort.asc);
@@ -572,16 +649,31 @@ extension QuizDetailSchemaQuerySortBy
 
 extension QuizDetailSchemaQuerySortThenBy
     on QueryBuilder<QuizDetailSchema, QuizDetailSchema, QSortThenBy> {
-  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterSortBy> thenById() {
+  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterSortBy>
+      thenByHashQuizId() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id', Sort.asc);
+      return query.addSortBy(r'hashQuizId', Sort.asc);
     });
   }
 
   QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterSortBy>
-      thenByIdDesc() {
+      thenByHashQuizIdDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'id', Sort.desc);
+      return query.addSortBy(r'hashQuizId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterSortBy>
+      thenByHashRankId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashRankId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QAfterSortBy>
+      thenByHashRankIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hashRankId', Sort.desc);
     });
   }
 
@@ -616,6 +708,13 @@ extension QuizDetailSchemaQuerySortThenBy
 
 extension QuizDetailSchemaQueryWhereDistinct
     on QueryBuilder<QuizDetailSchema, QuizDetailSchema, QDistinct> {
+  QueryBuilder<QuizDetailSchema, QuizDetailSchema, QDistinct>
+      distinctByHashQuizId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'hashQuizId');
+    });
+  }
+
   QueryBuilder<QuizDetailSchema, QuizDetailSchema, QDistinct> distinctByQuizId(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -633,9 +732,15 @@ extension QuizDetailSchemaQueryWhereDistinct
 
 extension QuizDetailSchemaQueryProperty
     on QueryBuilder<QuizDetailSchema, QuizDetailSchema, QQueryProperty> {
-  QueryBuilder<QuizDetailSchema, int, QQueryOperations> idProperty() {
+  QueryBuilder<QuizDetailSchema, int, QQueryOperations> hashRankIdProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'id');
+      return query.addPropertyName(r'hashRankId');
+    });
+  }
+
+  QueryBuilder<QuizDetailSchema, int, QQueryOperations> hashQuizIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'hashQuizId');
     });
   }
 
