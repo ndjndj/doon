@@ -1,18 +1,21 @@
+import 'package:doon/view/quiz/quiz.dart';
+import 'package:doon/view/result/result.dart';
+import 'package:doon/view/top/top.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 enum ViewState {
   top(
     text: "", 
-    widget: Center(child: Text("top"))
+    widget: Top()
   ),
   quiz(
     text: "", 
-    widget: Center(child: Text("top"))
+    widget: Quiz()
   ),
   result(
     text: "", 
-    widget: Center(child: Text("top"))
+    widget: Result()
   ),
   setting(
     text: "", 
