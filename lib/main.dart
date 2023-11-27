@@ -1,11 +1,10 @@
-
-import 'package:doon/internal/config/config.dart';
-import 'package:doon/internal/widget/restart/restart.dart';
-import 'package:doon/view/util/widget/scaffold_frame/scaffold_frame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:doon/internal/config/config.dart';
+import 'package:doon/internal/widget/restart/restart.dart';
+import 'package:doon/view/util/widget/scaffold_frame/scaffold_frame.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
